@@ -6,7 +6,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-      - 5001:5001
     volumes:
       - .:/app
     environment:
