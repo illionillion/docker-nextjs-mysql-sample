@@ -8,12 +8,14 @@ services:
       - 3000:3000
     volumes:
       - .:/app
+      - node_modules:/app/node_modules
     environment:
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USER=root
       - DB_PASSWORD=password
       - DB_DATABASE=snsdb
+      - TZ=Asia/Tokyo
     depends_on:
       - mysql
   mysql:
@@ -24,3 +26,5 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=snsdb
+volumes:
+  node_modules:

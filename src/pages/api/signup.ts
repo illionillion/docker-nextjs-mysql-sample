@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import mysql_connection from "@/lib/connection";
 import { RowDataPacket } from "mysql2";
-// import bcrypt from "bcrypt";
-// import argon2 from "argon2";
+import bcrypt from "bcrypt";
 
 const saltRounds = 10; // ハッシュ化のコストファクター
 
@@ -16,10 +15,9 @@ export default async function handler(
     
     const { name, email, password } = req.body;
 
-    // パスワードのハッシュ化 // うまくいかない
-    // const hashedPassword = bcrypt.hashSync(password, saltRounds);
-    // const hashedPassword = await argon2.hash(password);
-
+    // パスワードのハッシュ化
+    const hashedPassword = bcrypt.hashSync(password, saltRounds);
+    
     try {
 
       // usersテーブルにデータを挿入
@@ -27,8 +25,7 @@ export default async function handler(
       const [results] = await connection.execute(query, [
         name,
         email,
-        // hashedPassword,
-        password,
+        hashedPassword,
       ]);
 
       const newUser = {
