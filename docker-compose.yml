@@ -15,7 +15,6 @@ services:
       - DB_USER=root
       - DB_PASSWORD=password
       - DB_DATABASE=snsdb
-      - TZ=Asia/Tokyo
     depends_on:
       - mysql
   mysql:
@@ -26,5 +25,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=snsdb
+      - TZ=Asia/Tokyo
 volumes:
   node_modules:
